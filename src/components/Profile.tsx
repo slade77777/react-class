@@ -1,15 +1,16 @@
 import {FC, useState} from "react";
 
 export type ProfileType = {
-  fullname: string, age: number, dob: string, classValue: string, slogan?: string,
+  fullname: string, age: number, dob: string, classValue: string, slogan?: string
 }
 
-const Profile: FC<ProfileType & {changeLike: (val: boolean) => void}> = ({fullname, age, dob, classValue, slogan, changeLike}) => {
+const Profile: FC<ProfileType & {changeLike: (val: boolean) => void; setBonusAges: (id: number, age: number) => void; maxAge: number, position: number}> =
+  ({fullname, age, dob, classValue, slogan, changeLike, setBonusAges, maxAge, position}) => {
   const [isLiked, setLike] = useState<boolean>(false);
   const [bonusAge , setBonusAge] = useState(0);
-
   function addOneAge() {
     setBonusAge(bonusAge + 1);
+    setBonusAges(position, age + bonusAge + 1)
   }
 
   function handleLike() {
@@ -19,6 +20,7 @@ const Profile: FC<ProfileType & {changeLike: (val: boolean) => void}> = ({fullna
 
   if (1 < 2) {
     return <div>
+      { age + bonusAge === maxAge && <p>Lớn đầu nhất</p>}
       <p>Full name: {fullname}</p>
       <p>age: {age + bonusAge}</p>
       <p>dob: {dob}</p>
