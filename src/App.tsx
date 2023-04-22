@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {useRef, useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -28,13 +28,18 @@ const listProfile: Array<ProfileType> = [
   }
 ]
 function App() {
-  const [count, setCount] = useState(0)
+  const [likeNumber, setLikeNumber] = useState(0);
+
+  const changeLikeNumber = (isLike: boolean) => {
+    setLikeNumber(isLike ? likeNumber + 1 : likeNumber - 1);
+  }
+
+  const listProduct = listProfile.map((item, index) => <Profile changeLike={changeLikeNumber} key={index} fullname={item.fullname} age={item.age} dob={item.dob} classValue={item.classValue} slogan={item.slogan} /> );
 
   return (
     <div className="App">
-      {
-        listProfile.map((item, index) => <Profile key={index} fullname={item.fullname} age={item.age} dob={item.dob} classValue={item.classValue} slogan={item.slogan} /> )
-      }
+      <p>Tổng số like: {likeNumber}</p>
+      {listProduct}
     </div>
   )
 }

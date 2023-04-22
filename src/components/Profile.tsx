@@ -1,18 +1,23 @@
 import {FC, useState} from "react";
 
 export type ProfileType = {
-  fullname: string, age: number, dob: string, classValue: string, slogan?: string
+  fullname: string, age: number, dob: string, classValue: string, slogan?: string,
 }
 
-const Profile: FC<ProfileType> = ({fullname, age, dob, classValue, slogan}) => {
-  const [show, setShow] = useState<boolean>(true);
+const Profile: FC<ProfileType & {changeLike: (val: boolean) => void}> = ({fullname, age, dob, classValue, slogan, changeLike}) => {
+  const [isLiked, setLike] = useState<boolean>(false);
   const [bonusAge , setBonusAge] = useState(0);
 
   function addOneAge() {
     setBonusAge(bonusAge + 1);
   }
-  console.log(bonusAge)
-  if (show) {
+
+  function handleLike() {
+    setLike(isLiked === false ? true : false);
+    changeLike(!isLiked);
+  }
+
+  if (1 < 2) {
     return <div>
       <p>Full name: {fullname}</p>
       <p>age: {age + bonusAge}</p>
@@ -20,14 +25,12 @@ const Profile: FC<ProfileType> = ({fullname, age, dob, classValue, slogan}) => {
       <p>class: {classValue}</p>
       <p>slogan: {slogan}</p>
       <button onClick={addOneAge}>cộng 1 tuổi</button>
-      <button onClick={() => {
-        setShow(false)
-      }}>Ẩn</button>
+      <button onClick={handleLike}>{isLiked ? 'Liked' : 'Like'}</button>
     </div>
   }
-  return <button onClick={() => {
-    setShow(true)
-  }}>Hiện</button>
+
+  return <div>asdas</div>
+
 }
 
 export default Profile;
