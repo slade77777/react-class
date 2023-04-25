@@ -1,7 +1,7 @@
 import {FC, useState} from "react";
 
 export type ProfileType = {
-  fullname: string, age: number, dob: string, classValue: string, slogan?: string
+  id: number, fullname: string, age: number, dob: string, classValue: string, slogan?: string, isLiked?: boolean
 }
 
 const Profile: FC<ProfileType & {changeLike: (val: boolean) => void; setBonusAges: (id: number, age: number) => void; maxAge: number, position: number}> =
@@ -15,10 +15,9 @@ const Profile: FC<ProfileType & {changeLike: (val: boolean) => void; setBonusAge
 
   function handleLike() {
     setLike(isLiked === false ? true : false);
-    changeLike(!isLiked);
+    changeLike(!isLiked, age + bonusAge);
   }
 
-  if (1 < 2) {
     return <div>
       { age + bonusAge === maxAge && <p>Lớn đầu nhất</p>}
       <p>Full name: {fullname}</p>
@@ -29,9 +28,6 @@ const Profile: FC<ProfileType & {changeLike: (val: boolean) => void; setBonusAge
       <button onClick={addOneAge}>cộng 1 tuổi</button>
       <button onClick={handleLike}>{isLiked ? 'Liked' : 'Like'}</button>
     </div>
-  }
-
-  return <div>asdas</div>
 
 }
 
