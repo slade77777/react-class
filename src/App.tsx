@@ -1,6 +1,6 @@
 import './App.css'
 import Menus from "./components/Menus";
-import {createContext, useState} from "react";
+import {createContext, useEffect, useState} from "react";
 import Trade from "./components/Trade";
 
 export const MenuContext = createContext({
@@ -28,7 +28,7 @@ function App() {
 
   const finish = () => {
     setStep(1);
-    setChosenFoods([]);
+    // setChosenFoods([]);
   }
 
   return (
