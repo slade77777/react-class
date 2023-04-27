@@ -1,18 +1,44 @@
-import {createContext, useContext, useRef, useState} from 'react'
 import './App.css'
-import ListProfile from "./components/ListProfile";
+import Menus from "./components/Menus";
+import {createContext, useState} from "react";
+import Trade from "./components/Trade";
 
-export const TeenagerAgeContext = createContext<{age: number, changeAge: (val: number) => void}>({age: 0, changeAge: () => {}})
-
+export const MenuContext = createContext({
+  chosenFoods: [],
+  chooseFood: (val: any) => {}
+})
 function App() {
-  const [teenagerAge, setTeenagerAge] = useState(18)
+  const [chosenFoods , setChosenFoods] = useState([]);
+  const [step, setStep] = useState(1);
+
+  const handleChangeFood = (val: any) => {
+    let copyChosenFoods = [...chosenFoods];
+    const isChosen = chosenFoods.find(item => item.id === val.id);
+    if (isChosen) {
+      copyChosenFoods = copyChosenFoods.filter(item => item.id !== val.id)
+    } else {
+      copyChosenFoods = [...copyChosenFoods, val];
+    }
+    setChosenFoods(copyChosenFoods);
+  }
+
+  const payMenu = () => {
+    setStep(2);
+  }
+
+  const finish = () => {
+    setStep(1);
+    setChosenFoods([]);
+  }
 
   return (
-    <TeenagerAgeContext.Provider value={{age: teenagerAge, changeAge: setTeenagerAge}}>
-      <div className="App">
-        <ListProfile />
+    <MenuContext.Provider value={{chosenFoods, chooseFood: handleChangeFood}}>
+      <div>
+        {
+          step === 1 ? <Menus payMenu={payMenu} /> : <Trade finish={finish} />
+        }
       </div>
-    </TeenagerAgeContext.Provider>
+    </MenuContext.Provider>
   )
 }
 
