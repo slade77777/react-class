@@ -3,6 +3,7 @@ import './App.css'
 import Profile, {ProfileType} from "./components/Profile";
 import Modal from 'react-modal';
 import AddForm from "./components/AddForm";
+import {instance} from "./axiosInstance";
 
 Modal.setAppElement('#root');
 
@@ -13,11 +14,9 @@ function App() {
   useEffect(() => {
     // get list profile from server
     //@ts-ignore
-    fetch('https://645644b92e41ccf16918360b.mockapi.io/profile', {
-      method: 'GET'
-    }).then(res => res.json()).then(res => {
-      setListProfile(res)
-    })
+    instance.get('/profile').then(res => {
+      setListProfile(res.data);
+    }).catch(e => alert(e.message))
   }, [])
 
   function openModal() {
