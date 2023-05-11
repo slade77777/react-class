@@ -3,12 +3,17 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import {createContext, useState} from "react";
+import {ListProfile} from "./pages/ListProfile";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
   },
+  // {
+  //   path: "/create",
+  //   element: <AddForm />
+  // },
   {
     path: "/login",
     element: <Login />,

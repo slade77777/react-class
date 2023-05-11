@@ -10,7 +10,7 @@ const Login = () => {
     //handle logic check user
     if (username) {
       userProvider.setUser(username);
-      navigate(`/`)
+      navigate(`/?username=${username}`)
     } else {
       alert('vui lòng nhập username')
     }
