@@ -1,17 +1,30 @@
 import './App.css'
-import ClickAction from "./components/ClickAction";
-import HoverAction from "./components/HoverAction";
-import withIncrease from "./hoc/withIncrease";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import Login from "./pages/Login";
+import {createContext, useState} from "react";
 
-const WrappedClick = withIncrease(ClickAction, 10);
-const WrappedHover = withIncrease(HoverAction, 20);
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+]);
+
+export const UserContext =
+  createContext<{user?: string, setUser?: (val: string) => void}>({user: '', setUser: () => {}})
+
 function App() {
-
-
+  const [user, setUser] = useState('');
   return (
     <div className="App">
-      <WrappedClick/>
-      <WrappedHover />
+      <UserContext.Provider value={{user, setUser}}>
+        <RouterProvider router={router} />
+      </UserContext.Provider>
     </div>
   )
 }
