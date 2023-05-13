@@ -2,8 +2,8 @@ import './App.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
-import {createContext, useState} from "react";
-import {ListProfile} from "./pages/ListProfile";
+import {Provider} from "react-redux";
+import {store} from "./redux/store";
 
 const router = createBrowserRouter([
   {
@@ -20,16 +20,12 @@ const router = createBrowserRouter([
   },
 ]);
 
-export const UserContext =
-  createContext<{user?: string, setUser?: (val: string) => void}>({user: '', setUser: () => {}})
-
 function App() {
-  const [user, setUser] = useState('');
   return (
     <div className="App">
-      <UserContext.Provider value={{user, setUser}}>
+      <Provider store={store}>
         <RouterProvider router={router} />
-      </UserContext.Provider>
+      </Provider>
     </div>
   )
 }
