@@ -2,15 +2,18 @@ import {Link, redirect, useNavigate} from "react-router-dom";
 import {useContext, useState} from "react";
 import {store} from "../redux/store";
 import {login} from "../redux/actions/userAction";
+import {useDispatch, useStore} from "react-redux";
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const store = useStore();
   const redirectToHomePage = () => {
     //handle logic check user
     if (username && password) {
-      store.dispatch(login({username, password}))
+      dispatch(login({username, password}))
       navigate(`/`)
     } else {
       alert('vui lòng nhập username hoặc password')
