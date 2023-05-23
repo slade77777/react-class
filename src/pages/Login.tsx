@@ -1,8 +1,8 @@
 import {Link, redirect, useNavigate} from "react-router-dom";
 import {useContext, useState} from "react";
 import {store} from "../redux/store";
-import {login} from "../redux/actions/userAction";
 import {useDispatch, useStore} from "react-redux";
+import {login} from "../redux/slice/userSlice";
 
 const Login = () => {
   const [username, setUsername] = useState('')
